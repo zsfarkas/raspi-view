@@ -1,6 +1,7 @@
-from default_view import DefaultView
-from test_view import TestView
 from controller import Controller
+from views.default_view import DefaultView
+from views.test_view import TestView
+from views.network_status_view import NetworkStatusView
 from time import sleep
 
 class MainLoop:
@@ -10,12 +11,23 @@ class MainLoop:
         self.views = self._init_view_classes(self.controller, view_classes)
         self.current_view_index = 0
 
+    def spin(self):
+        print("starting main loop...")
+        try:
+            while True:
+                self._update_display()
+                self._update_leds()
+
+                sleep(0.1)
+        except KeyboardInterrupt:
+            print("\nshutting down...")
+
     def _init_view_classes(self, controller: Controller, view_classes):
         views = []
         for view_class in view_classes:
-            print("adding view " + str(view_classes) + "...")
+            print("adding view " + str(view_class) + "...")
             views.append(view_class(controller))
-        
+
         return views
 
     def _activate_next_view(self):
@@ -26,31 +38,38 @@ class MainLoop:
 
         print("view activated: '" + self._get_current_view().get_name() + "'")
 
-    def spin(self):
-        print("starting main loop...")
-        try:
-            while True:
-                if self._get_current_view() != None:
-                    with self.controller.get_canvas() as canvas:
-                        bounding_box = self.controller.get_device_bounding_box()
-                        self._get_current_view().update_display(canvas, bounding_box)
-
-                for view in self.views:
-                    view.update()
-
-                sleep(0.1)
-        except (KeyboardInterrupt):
-            print("\nshutting down...")
-
     def _get_current_view(self):
         return self.views[self.current_view_index]
 
+    def _update_display(self):
+        if self._get_current_view() is not None:
+            with self.controller.get_canvas() as canvas:
+                bounding_box = self.controller.get_device_bounding_box()
+                self._get_current_view().update_display(canvas, bounding_box)
+
+    def _update_leds(self):
+        red_count = 0
+        blue_count = 0
+
+        for view in self.views:
+            view_count = view.get_warning_count() 
+            red_count += view_count[0]
+            blue_count += view_count[1]
+
+        self.controller.flash(red_count, blue_count)
 
 if __name__ == "__main__":
-    view_classes = [
-        DefaultView,
-        TestView
+    # tracemalloc.start()
+
+    VIEW_CLASSES = [
+        NetworkStatusView,
+        TestView,
+        # DefaultView
     ]
 
-    main_loop = MainLoop(view_classes=view_classes)
-    main_loop.spin()
+    MainLoop(view_classes=VIEW_CLASSES).spin()
+
+
+
+
+

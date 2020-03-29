@@ -3,7 +3,7 @@ from controller import Controller
 
 class DefaultView(View):
     def __init__(self, controller: Controller):
-        super().__init__(controller)
+        super()
 
     def update_display(self, canvas, bounding_box):
         canvas.rectangle(bounding_box, outline="white", fill="black")
@@ -11,4 +11,3 @@ class DefaultView(View):
 
     def get_name(self):
         return "Default View"
-

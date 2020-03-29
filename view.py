@@ -1,14 +1,15 @@
 from controller import Controller
+from PIL import ImageDraw
 
-class View(object):
+class View:
     def __init__(self, controller: Controller):
         self.controller = controller
 
-    def get_name(self):
+    def get_name(self) -> str:
         return "No name"
 
-    def update(self):
-        pass
+    def get_warning_count(self) -> tuple:
+        return (0, 0) # red, blue
 
-    def update_display(self, canvas):
+    def update_display(self, canvas: ImageDraw):
         pass

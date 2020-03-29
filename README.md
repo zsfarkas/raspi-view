@@ -1,8 +1,8 @@
 # Introduction
 
-This is a very simple but extendable python framework to display different kind of information on a self-made Raspberry Pi HAT with a Display (type: sh1106, size: 128x64), two LEDs (a red one and a blue one), and with two buttons.
-
 ![Self-made Raspberry Pi HAT](images/HAT.jpg "Self-made Raspberry Pi HAT")
+
+This is a very simple but extendable python framework to display different kind of information on a self-made Raspberry Pi HAT with a Display (type: sh1106, size: 128x64), two LEDs (a red one and a blue one), and with two buttons.
 
 # List of used parts
 

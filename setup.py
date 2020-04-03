@@ -8,7 +8,7 @@ packages.append('.')
 
 setuptools.setup(
     name='raspi-view',  
-    version='0.1',
+    version='0.2',
     scripts=['raspi-view'] ,
     author="Zsolt Farkas",
     description="An app to display different views on a Raspberry Pi HAT with display sh1106",

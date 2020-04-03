@@ -16,6 +16,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/zsfarkas/raspi-view",
     packages=setuptools.find_packages(),
+    keywords="raspi,raspberry,hat,display,view,monitor,screen",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

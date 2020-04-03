@@ -15,27 +15,32 @@ This is a very simple but extendable python app to display different kind of vie
 * Raspberry Pi: https://www.amazon.de/dp/B07TC2BK1X/ref=cm_sw_em_r_mt_dp_U_SGoGEb8R24BM6
 * ...
 
-## Installing
+## Usage
+
+### Installing
 
 ```
 $ pip install raspi-view
 ```
 
-## Install as a service
-
-After installing the pip package you can create and install an OS wide service, which will be restarted every time you restart you Raspberry Pi:
-
-```
-$ raspi-view --install
-```
-
-## Start directly
+### Start directly
 
 ```
 $ raspi-view --start
 ```
 
-## Ask for more help
+### Install as a service
+
+After installing the pip package you can create and install an OS wide service, which will be restarted every time you restart you Raspberry Pi:
+
+```
+$ sudo pip install raspi-view
+$ raspi-view --install
+```
+
+Hint: make sure you install raspi-view with sudo.
+
+### Ask for more help
 
 ```
 $ raspi-view --help

@@ -2,3 +2,4 @@ gpiozero
 PIL
 luma.core
 setuptools
+getpass

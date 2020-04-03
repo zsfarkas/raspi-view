@@ -1,5 +1,5 @@
-from view import View
-from controller import Controller
+from main.view import View
+from main.controller import Controller
 
 class TestView(View):
     def __init__(self, controller: Controller):

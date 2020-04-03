@@ -1,11 +1,19 @@
-from controller import Controller
-from views.default_view import DefaultView
-from views.test_view import TestView
-from views.network_status_view import NetworkStatusView
+from main.controller import Controller
+from main.views.default_view import DefaultView
+from main.views.test_view import TestView
+from main.views.network_status_view import NetworkStatusView
 from time import sleep
 
+DEFAULT_VIEW_CLASSES = [
+    NetworkStatusView,
+    TestView
+]
+
 class MainLoop:
-    def __init__(self, view_classes):
+    def __init__(self, view_classes=None):
+        if view_classes is None:
+            view_classes = DEFAULT_VIEW_CLASSES
+        
         self.controller = Controller(self._activate_next_view)
 
         self.views = self._init_view_classes(self.controller, view_classes)
@@ -60,14 +68,7 @@ class MainLoop:
 
 if __name__ == "__main__":
     # tracemalloc.start()
-
-    VIEW_CLASSES = [
-        NetworkStatusView,
-        TestView,
-        # DefaultView
-    ]
-
-    MainLoop(view_classes=VIEW_CLASSES).spin()
+    MainLoop().spin()
 
 
 

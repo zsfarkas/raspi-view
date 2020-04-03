@@ -1,4 +1,4 @@
-from controller import Controller
+from main.controller import Controller
 from PIL import ImageDraw
 
 class View:

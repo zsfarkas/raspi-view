@@ -1,7 +1,7 @@
 import time
 from gpiozero import PingServer
-from view import View
-from controller import Controller
+from main.view import View
+from main.controller import Controller
 from threading import Thread
 
 class NetworkStatusView(View):
@@ -43,12 +43,14 @@ class NetworkStatusView(View):
             Thread(group=None, target=self._check_pings, args=[]).start()
 
     def _check_pings(self):
+            print("pinging network devices...")
             local_status_cache = []
 
             for ping_name, ping in self.pings:
                 local_status_cache.append((ping_name, ping.value))
 
             self.status_cache = local_status_cache
+            print("pinging has been finished")
 
     def _get_status(self, status: bool) -> str:
         if status:

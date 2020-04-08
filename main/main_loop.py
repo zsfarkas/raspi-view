@@ -1,12 +1,12 @@
 from main.controller import Controller
 from main.views.default_view import DefaultView
-from main.views.test_view import TestView
+from main.views.load_view import LoadView
 from main.views.network_status_view import NetworkStatusView
 from time import sleep
 
 DEFAULT_VIEW_CLASSES = [
-    NetworkStatusView,
-    TestView
+    LoadView,
+    NetworkStatusView
 ]
 
 class MainLoop:

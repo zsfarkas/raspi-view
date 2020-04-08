@@ -38,7 +38,7 @@ class NetworkStatusView(View):
         return "Network Status View"
 
     def _check_pings_in_background(self):
-        if abs(self.last_check - time.time()) > 10: # 10 second
+        if abs(self.last_check - time.time()) > 60: # 60 second
             self.last_check = time.time()
             Thread(group=None, target=self._check_pings, args=[]).start()
 

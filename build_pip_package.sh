@@ -4,7 +4,7 @@ sudo python3 -m pip install --user --upgrade twine
 
 python3 setup.py bdist_wheel
 
-sudo pip3 install dist/raspi_view-0.3-py3-none-any.whl
+sudo pip3 install dist/raspi_view-0.4-py3-none-any.whl
 
 # do not forget to set up your .pypirc file
 python3 -m twine upload dist/*

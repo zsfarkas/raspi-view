@@ -17,7 +17,7 @@ class LoadView(View):
 
     def get_warning_count(self):
         cpu_load_in_percent = self.cpu_load.load_average / 4.0 * 100
-        if abs(self.last_check - time.time()) > 5.0:
+        if abs(self.last_check - time.time()) > self.get_update_frequence():
             self.cpu_load_cache.append(cpu_load_in_percent)
             self.last_check = time.time()
 
@@ -39,6 +39,8 @@ class LoadView(View):
         for index, load in enumerate(self.cpu_load_cache):
             canvas.line([(index, 63 - int(load/100.0 * 34.0)), (index, 63)], width=1, fill="white")
 
+    def get_update_frequence(self):
+        return 5
 
     def get_name(self) -> str:
         return "Load View"

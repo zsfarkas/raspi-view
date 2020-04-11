@@ -2,7 +2,7 @@ from main.controller import Controller
 from main.views.default_view import DefaultView
 from main.views.load_view import LoadView
 from main.views.network_status_view import NetworkStatusView
-from time import sleep
+from time import sleep, time
 
 DEFAULT_VIEW_CLASSES = [
     LoadView,
@@ -18,6 +18,8 @@ class MainLoop:
 
         self.views = self._init_view_classes(self.controller, view_classes)
         self.current_view_index = 0
+
+        self.last_display_update = 0
 
     def spin(self):
         print("starting main loop...")
@@ -44,13 +46,17 @@ class MainLoop:
         else: 
             self.current_view_index += 1
 
+        self.last_display_update = 0
+
         print("view activated: '" + self._get_current_view().get_name() + "'")
 
     def _get_current_view(self):
         return self.views[self.current_view_index]
 
     def _update_display(self):
-        if self._get_current_view() is not None:
+        current_update_delay = abs(self.last_display_update - time()) 
+        if self._get_current_view() is not None and current_update_delay >= self._get_current_view().get_update_frequence():
+            self.last_display_update = time()
             with self.controller.get_canvas() as canvas:
                 bounding_box = self.controller.get_device_bounding_box()
                 self._get_current_view().update_display(canvas, bounding_box)

@@ -9,7 +9,10 @@ class View:
         return "No name"
 
     def get_warning_count(self) -> tuple:
-        return (0, 0) # red, blue
+        return (0, 0)  # red, blue
 
     def update_display(self, canvas: ImageDraw):
         pass
+
+    def get_update_frequence(self) -> int:
+        return 1  # default one second

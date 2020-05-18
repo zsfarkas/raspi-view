@@ -9,8 +9,8 @@ class NetworkStatusView(View):
     def __init__(self, controller: Controller):
         super().__init__(controller)
         self.pings = [
-            ("Router", PingServer("10.0.1.1")),
-            ("DNS", PingServer("10.0.1.6")),
+            ("Router", PingServer("192.168.100.1")),
+            ("DNS", PingServer("185.228.168.168")),
             ("Google", PingServer("google.com"))
         ]
 

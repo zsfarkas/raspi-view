@@ -8,7 +8,7 @@ from luma.core.render import canvas
 from luma.oled.device import sh1106
 
 class Controller(object):
-    def __init__(self, push_handler, port=1, address=0x3C):
+    def __init__(self, push_handler_left, push_handler_right, port=1, address=0x3C):
         self.led_red = PWMLED(6)
         self.led_blue = PWMLED(12)
         self._red_count = 0
@@ -17,7 +17,8 @@ class Controller(object):
         self.button_left = Button(5)
         self.button_right = Button(21)
 
-        self.button_left.when_activated = push_handler
+        self.button_left.when_activated = push_handler_left
+        self.button_right.when_activated = push_handler_right
 
         serial = i2c(port=port, address=address)
         self.device = sh1106(serial)

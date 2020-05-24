@@ -2,11 +2,15 @@ from main.controller import Controller
 from main.views.default_view import DefaultView
 from main.views.load_view import LoadView
 from main.views.network_status_view import NetworkStatusView
+from main.views.shutdown_view import ShutdownView
+from main.views.reboot_view import RebootView
 from time import sleep, time
 
 DEFAULT_VIEW_CLASSES = [
     LoadView,
-    NetworkStatusView
+    NetworkStatusView,
+    ShutdownView,
+    RebootView
 ]
 
 class MainLoop:
@@ -14,7 +18,7 @@ class MainLoop:
         if view_classes is None:
             view_classes = DEFAULT_VIEW_CLASSES
         
-        self.controller = Controller(self._activate_next_view)
+        self.controller = Controller(self._activate_next_view, self._forward_right_push)
 
         self.views = self._init_view_classes(self.controller, view_classes)
         self.current_view_index = 0
@@ -49,6 +53,11 @@ class MainLoop:
         self.last_display_update = 0
 
         print("view activated: '" + self._get_current_view().get_name() + "'")
+
+    def _forward_right_push(self):
+        print("forwarding right button push to current view...")
+
+        self._get_current_view().button_pushed()
 
     def _get_current_view(self):
         return self.views[self.current_view_index]

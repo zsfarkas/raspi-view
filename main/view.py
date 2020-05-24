@@ -16,3 +16,6 @@ class View:
 
     def get_update_frequence(self) -> int:
         return 1  # default one second
+
+    def button_pushed(self):
+        pass
